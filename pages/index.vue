@@ -1,7 +1,21 @@
 <template>
   <div>
-    <RoomGalery/>
+    <NavBar/>
+
+    <section class="section">
+    </section>
+
+    <section class="section">
+      <RoomGalery/>
+
+    </section>
+
+    <VFooter/>
+    
   </div>
+
+
+
 </template>
 
 
