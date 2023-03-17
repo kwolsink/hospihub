@@ -8,5 +8,12 @@
 </template>
 
 <script setup lang="ts">
-import rooms from "../samples/rooms"
+import { useRoomStore } from '~~/stores/roomstore';
+const roomStore = useRoomStore();
+
+const rooms = computed(() => {
+  roomStore.fetchRooms();
+  return roomStore.$state.rooms
+})
+
 </script>
