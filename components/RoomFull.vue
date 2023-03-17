@@ -20,6 +20,9 @@
         <h3>Beschrijving</h3>
         <p>{{ room?.description }}</p>
       </div>
+      <button class="button is-primary m-5" @click="firebase.signInWithGoogle()">
+        Log in om te reageren
+      </button>
     </div>
   </div>
 </template>
@@ -27,7 +30,8 @@
 <script setup lang="ts">
 import Room from '~~/shared/types/Room';
 
-const route = useRoute()
+const firebase = useFireBase()
+
 
 const props = defineProps({
   room: {
