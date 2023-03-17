@@ -7,8 +7,13 @@ export const useRoomStore = defineStore('rooms', {
   state: () => ({ rooms: [] as Room[]}),
   actions: {
     fetchRooms() {
+      // fetch all rooms
       this.rooms = rooms
     },
+    fetchSingleRoomAndReplace(id : string) {
+      this.rooms = []
+      // fetch single room
+    }
   },
   getters: {
     getRoomById: (state) => {
