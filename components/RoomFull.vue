@@ -12,12 +12,16 @@
           </figure>
         </div>
       </section> 
-
-
-      <section class="section description">
-        <h3>Beschrijving</h3>
-        <p>{{ room?.description }}</p>
-      </section>
+      <div class="is-flex is-flex-direction-column">
+        <div class="tags">
+          <span class="tag mr-1">{{rentText }}</span>
+          <span v-if="room.amountOfRoommates != null"  class="tag mr-1">{{ roomMatesText }}</span>
+        </div>
+        <div class="description">
+          <h3>Beschrijving</h3>
+          <p>{{ room?.description }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>

@@ -13,7 +13,7 @@
     <div class="card-content">
       <div class="content is-flex">
         <span class="tag mr-1">{{rentText }}</span>
-        <span class="tag mr-1">{{ roomMatesText }}</span>
+        <span v-if="room.amountOfRoommates != null" class="tag mr-1">{{ roomMatesText }}</span>
       </div>
       <div class="content">
         {{ room.description }}
