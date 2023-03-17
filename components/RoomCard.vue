@@ -15,11 +15,16 @@
         {{ room?.description }}
       </div>
     </div>
+    <footer class="card-footer">
+      <NuxtLink class="card-footer-item" :to="`${route.fullPath}/${room?.id}`">Meer informatie</NuxtLink>
+    </footer>
   </div>
 </template>
 
 
 <script setup="true" lang="ts">
+
+const route = useRoute();
 
 const props = defineProps({
   room: Object,
