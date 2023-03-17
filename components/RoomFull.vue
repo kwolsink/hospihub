@@ -20,9 +20,14 @@
         <h3>Beschrijving</h3>
         <p>{{ room?.description }}</p>
       </div>
-      <button class="button is-primary m-5" @click="firebase.signInWithGoogle()">
+      <section class="reaction-section mt-5">
+        <button v-if="!firebase.isAuthenticated()" class="button is-primary m-5" @click="firebase.signInWithGoogle()">
         Log in om te reageren
-      </button>
+        </button>
+        <ReactionForm v-else/>
+      </section>
+
+      
     </div>
   </div>
 </template>
