@@ -3,6 +3,7 @@
     <NavBar/>
 
     <section class="section">
+      <SearchBar></SearchBar>
     </section>
 
     <section class="section">
