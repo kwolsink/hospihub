@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavBar/>
+
 
     <section class="section">
       <SearchBar></SearchBar>
@@ -11,7 +11,7 @@
 
     </section>
 
-    <VFooter/>
+
     
   </div>
 
