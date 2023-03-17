@@ -12,6 +12,11 @@
     "sass": "^1.59.3"
   },
   "dependencies": {
-    "bulma": "^0.9.4"
+    "@pinia/nuxt": "^0.4.7",
+    "bulma": "^0.9.4",
+    "pinia": "^2.0.33"
+  },
+  "overrides": {
+    "vue": "latest"
   }
 }
