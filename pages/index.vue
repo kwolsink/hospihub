@@ -1,7 +1,36 @@
 <template>
-  <div class="container">
-    <h1 class="title">Hello, world!</h1>
-    <p class="subtitle">This is a Nuxt 3 project with Bulma CSS.</p>
-    <button class="button is-ghost">hello world</button>
+  <div>
+    <div class="columns">
+      <div v-for="room in rooms" class="column is-one-third">
+        <RoomCard :room="room">
+        </RoomCard>
+      </div>
+    </div>
+
   </div>
 </template>
+
+
+<script setup lang="ts">
+
+const rooms = [
+  {
+    thumbnail: "room.jpeg",
+    description: "foo bar",
+    title: "Gezellige kamer in het centrum van Amsterdam."
+  },
+  {
+    thumbnail: "room.jpeg",
+    description: "foo bar",
+    title: "Ongezellige kamer in  centrum van Almere."
+  },
+  {
+    thumbnail: "room.jpeg",
+    description: "foo bar",
+    title: "foo"
+  }
+]
+
+
+</script>
+
