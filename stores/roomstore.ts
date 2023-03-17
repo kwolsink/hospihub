@@ -10,4 +10,9 @@ export const useRoomStore = defineStore('rooms', {
       this.rooms = rooms
     },
   },
+  getters: {
+    getRoomById: (state) => {
+      return (roomId : string) => state.rooms.find((room) => room.id == roomId)
+    }
+  }
 })

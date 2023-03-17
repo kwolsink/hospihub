@@ -31,7 +31,6 @@ import Room from '~~/shared/types/Room';
 
 const route = useRoute()
 
-
 const props = defineProps({
   room: {
     type: Object as PropType<Room>,
