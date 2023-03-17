@@ -1,3 +1,3 @@
 <template>
-  hello world!
+  room id
 </template>
