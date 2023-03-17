@@ -1,4 +1,5 @@
-import City from "./City"
+import City from "./City";
+
 
 interface Room {
   id: string,

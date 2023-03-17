@@ -23,13 +23,31 @@
 </template>
 
 <script setup lang="ts">
+import Room from '~~/shared/types/Room';
+
 const route = useRoute()
 
 
-defineProps({
-  room: Object
-})
+const props = defineProps({
+  room: {
+    type: Object as PropType<Room>,
+    required: true
+  }
+});
+const rentText = computed(() => {
+  if (props.room.rent != null) {
+    return `€${props.room.rent} p/m`
+  }
+  return "Huur onbekend"
+});
 
+
+const roomMatesText = computed(() => {
+  if (props.room.amountOfRoommates === 1) {
+    return `${props.room.amountOfRoommates} huisgenoot`;
+  }
+  return `${props.room.amountOfRoommates} huisgenoten`;
+});
 
 </script>
 

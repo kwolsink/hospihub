@@ -27,7 +27,8 @@
 
 
 <script setup="true" lang="ts">
-import Room from "../shared/types/Room"
+import Room from '~~/shared/types/Room';
+
 
 const route = useRoute();
 
