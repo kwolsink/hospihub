@@ -7,7 +7,7 @@
     </div>
     <div class="card-image ">
       <figure class="image is-4by3">
-        <img :src="room?.thumbnail">
+        <img :src="room?.images?.at(0)">
       </figure>
     </div>
     <div class="card-content">
@@ -27,7 +27,7 @@
 const route = useRoute();
 
 const props = defineProps({
-  room: Object,
+  room: Object as PropType<Room>,
 });
 
 </script>
