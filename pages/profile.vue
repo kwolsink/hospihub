@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ChatOverviewPanel></ChatOverviewPanel>
+    <ChatComplete/>
   </div>
-
 </template>
+
