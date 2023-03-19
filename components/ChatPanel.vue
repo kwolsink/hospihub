@@ -3,10 +3,13 @@
     <p class="panel-heading">
       {{ chatTitle }}
     </p>
-    <p class="panel-block chat-content-window">
+    <p class="panel-block chat-content-window" id="chatWindow">
     <div class="is-flex is-flex-direction-column message-container">
       <div v-for="message in messages" class="message" :class="getMessageStyle(message)">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat aliquam odit similique ullam dolore, rerum, perferendis impedit nam expedita, saepe quo sint iusto necessitatibus! Dolores vero quis omnis earum dolorem, cum deleniti molestiae iure temporibus enim ipsam quo corrupti aperiam nisi, vitae doloremque ipsum! Esse quisquam iure sequi libero error.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat aliquam odit similique ullam dolore, rerum,
+        perferendis impedit nam expedita, saepe quo sint iusto necessitatibus! Dolores vero quis omnis earum dolorem, cum
+        deleniti molestiae iure temporibus enim ipsam quo corrupti aperiam nisi, vitae doloremque ipsum! Esse quisquam
+        iure sequi libero error.
       </div>
     </div>
 
@@ -24,6 +27,17 @@
 
 <script setup lang="ts">
 import Chat from '~~/shared/types/Chat';
+
+
+// set scroll from top
+
+onMounted(() => {
+  const chatWindow = document.getElementById("chatWindow")
+  if (chatWindow) {
+    chatWindow.scrollTop = chatWindow?.scrollHeight;
+  }
+})
+
 
 
 const props = defineProps({
@@ -106,6 +120,4 @@ textarea {
   min-height: 2.5em;
   max-height: 14em;
 }
-
-
 </style>
