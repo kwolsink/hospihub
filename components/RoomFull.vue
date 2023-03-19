@@ -21,7 +21,7 @@
         <p>{{ room?.description }}</p>
       </div>
       <section class="reaction-section mt-5">
-        <button v-if="!firebase.isAuthenticated()" class="button is-primary m-5" @click="firebase.signInWithGoogle()">
+        <button v-if="!firebase?.currentUser" class="button is-primary m-5" @click="firebase?.signInWithGoogle()">
         Log in om te reageren
         </button>
         <ReactionForm v-else/>
@@ -35,7 +35,11 @@
 <script setup lang="ts">
 import Room from '~~/shared/types/Room';
 
-const firebase = useFireBase()
+const firebase = ref()
+
+onMounted(async () => {
+  firebase.value = useFireBase()
+}) 
 
 
 const props = defineProps({

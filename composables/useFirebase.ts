@@ -2,30 +2,24 @@ import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from
 
 
 export const useFireBase = () => {
-  const provider = new GoogleAuthProvider();
   const auth = getAuth();
-  const signInWithGoogle = () => signInWithPopup(auth, provider).then((result) => {
-  })
-
-
-  const uid = ref();
-  const username = ref();
-
+  const provider = new GoogleAuthProvider();
+  const signInWithGoogle = () => signInWithPopup(auth, provider)
+  const currentUser = ref()
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      uid.value = user?.uid;
-      username.value = user?.displayName;
+      currentUser.value = user
     } else {
-      uid.value = null;
-      username.value = null;
+      currentUser.value = null;
     }
   });
 
-  const isAuthenticated = () => {return uid.value != null;}
+  const signOut = async () => {
+    await auth.signOut()
+  };
 
 
-
-  return { signInWithGoogle, isAuthenticated}
+  return { signInWithGoogle, currentUser, signOut }
 }
 
 
