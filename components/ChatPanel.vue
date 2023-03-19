@@ -5,7 +5,7 @@
     </p>
     <p class="panel-block chat-content-window" id="chatWindow">
     <div class="is-flex is-flex-direction-column message-container">
-      <div v-for="message in messages" class="message" :class="getMessageStyle(message)">
+      <div v-for="message in chatMessages" class="message" :class="getMessageStyle(message)">
         {{ message.content }}
       </div>
     </div>
@@ -13,8 +13,8 @@
     </p>
 
     <div class="panel-block button-container is-flex">
-      <textarea class="input is-primary" type="textarea"> </textarea>
-      <button class="button">
+      <textarea v-model="currentMessage" class="input is-primary" type="textarea"> </textarea>
+      <button @click="sendMessage()" class="button">
         Verstuur
       </button>
     </div>
@@ -99,6 +99,23 @@ const getMessageStyle = (message: any) => {
     "message-right": true
   }
 
+}
+
+const currentMessage = ref("");
+
+const sendMessage = () => {
+  const trimmedMessage = currentMessage.value.trim();
+  if (trimmedMessage !== "") {
+    const message = {
+      "senderId": ownId,
+      "content": trimmedMessage
+    }
+    chatMessages.value.push(message);
+    currentMessage.value = "";
+    const chatWindow = document.getElementById("chatWindow");
+    if (chatWindow)
+      setTimeout(() => chatWindow.scrollTop = chatWindow?.scrollHeight, 10);
+  }
 }
 
 </script>
