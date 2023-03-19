@@ -19,3 +19,10 @@ const setOpenChat = (chat : Chat) => {
 }
 
 </script>
+
+<style scoped>
+.column {
+  padding: 0;
+}
+
+</style>

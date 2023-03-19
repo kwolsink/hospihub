@@ -6,10 +6,9 @@
     <p class="panel-block chat-content-window">
 
     </p>
-    <textarea class="panel-block textarea chat-message-window" rows="3" placeholder="Typ hier uw bericht">
 
-      </textarea>
-    <div class="panel-block button-container is-flex is-justify-content-flex-end">
+    <div class="panel-block button-container is-flex">
+      <textarea class="input is-primary" type="textarea"> </textarea>
       <button class="button">
         Verstuur
       </button>
@@ -39,4 +38,6 @@ const chatTitle = computed(() => {
 .chat-content-window {
   min-height: 100px;
 }
+
+textarea { resize: vertical; min-height: 2.5em; max-height: 14em; }
 </style>
