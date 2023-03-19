@@ -26,7 +26,7 @@
           Plaats een kamer
         </NuxtLink>
 
-        <NuxtLink v-if="firebase?.currentUser" to="/" class="navbar-item has-text-info">
+        <NuxtLink v-if="firebase?.currentUser" to="/profile" class="navbar-item has-text-info">
           Profiel
         </NuxtLink>
 
