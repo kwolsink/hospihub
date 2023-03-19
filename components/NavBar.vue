@@ -14,13 +14,17 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <a class="navbar-item">
+        <NuxtLink to="/" class="navbar-item">
           Home
-        </a>
+        </NuxtLink>
 
-        <a class="navbar-item">
-          Documentation
-        </a>
+        <NuxtLink to="/rooms" class="navbar-item">
+          Zoek een kamer
+        </NuxtLink>
+
+        <NuxtLink to="/submit-room" class="navbar-item">
+          Plaats een kamer
+        </NuxtLink>
 
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
