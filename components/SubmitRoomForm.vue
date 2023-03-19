@@ -59,9 +59,6 @@
 </template>
 
 <script>
-import { getAllCities } from '~~/shared/types/City'
-
-
 const selected = ref()
 
 </script>
