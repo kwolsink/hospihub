@@ -60,7 +60,7 @@
 const firebase = ref();
 
 onMounted(async () => {
-  firebase.value = useFireBase();
+  firebase.value = useFirebaseAuth();
 });
 
 </script>

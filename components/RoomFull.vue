@@ -38,7 +38,7 @@ import Room from '~~/shared/types/Room';
 const firebase = ref()
 
 onMounted(async () => {
-  firebase.value = useFireBase()
+  firebase.value = useFirebaseAuth()
 }) 
 
 

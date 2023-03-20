@@ -1,7 +1,7 @@
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth"
 
 
-export const useFireBase = () => {
+export const useFirebaseAuth = () => {
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
   const signInWithGoogle = () => signInWithPopup(auth, provider)
