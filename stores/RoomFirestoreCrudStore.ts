@@ -14,10 +14,14 @@ export const useRoomCrudStore = defineStore('rooms', {
           createdOn: timestamp,
           updatedOn: timestamp
         } as RoomMetadata);
+        return true;
       } catch (e) {
         console.log("Error adding document: ", e)
+        return false;
       }
-    }
+    },
+
+
   }
 
 });
