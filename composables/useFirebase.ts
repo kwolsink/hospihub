@@ -1,5 +1,5 @@
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth"
-
+import { getFirestore } from "firebase/firestore";
 
 export const useFirebaseAuth = () => {
   const auth = getAuth();
@@ -20,6 +20,14 @@ export const useFirebaseAuth = () => {
 
 
   return { signInWithGoogle, currentUser, signOut }
+}
+
+
+export const useFirestore = () => {
+  const db = getFirestore();
+
+
+  return {db}
 }
 
 
