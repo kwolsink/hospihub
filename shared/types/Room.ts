@@ -1,4 +1,3 @@
-import { Timestamp } from "firebase/firestore";
 import City from "./City";
 
 
@@ -8,8 +7,8 @@ interface Room {
 }
 
 interface RoomMetadata {
-  createdOn: Timestamp,
-  updatedOn: Timestamp,
+  createdOn: Date,
+  updatedOn: Date,
   data: RoomData
 }
 

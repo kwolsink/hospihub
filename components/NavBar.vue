@@ -26,7 +26,7 @@
           Plaats een kamer
         </NuxtLink>
 
-        <NuxtLink v-if="firebase?.currentUser" to="/profile" class="navbar-item has-text-info">
+        <NuxtLink v-if="false" to="/profile" class="navbar-item has-text-info">
           Profiel
         </NuxtLink>
 
@@ -35,7 +35,7 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <div v-if="!firebase?.currentUser" class="buttons-logged-out">
+            <div v-if="false" class="buttons-logged-out">
               <a class="button is-primary">
                 <strong>Sign up</strong>
               </a>
@@ -44,7 +44,7 @@
               </a>
             </div>
             <div v-else class="buttons-logged-in">
-              <a class="button is-light" @click="firebase?.signOut()">
+              <a class="button is-light">
                 Log uit
               </a>
             </div>
@@ -55,12 +55,3 @@
   </nav>
 </template>
 
-
-<script setup lang="ts">
-const firebase = ref();
-
-onMounted(async () => {
-  firebase.value = useFirebaseAuth();
-});
-
-</script>

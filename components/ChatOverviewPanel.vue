@@ -17,9 +17,8 @@
 
 
 <script setup lang="ts">
-import sampleChats from "~~/samples/chats"
 
-const chats = ref(sampleChats)
+const chats = ref([])
 
 const maxMessagePreviewLength = 100;
 const shortenMessagePreview = (msg: string) => {

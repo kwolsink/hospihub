@@ -36,8 +36,6 @@ onMounted(() => {
 })
 
 
-
-
 const props = defineProps({
   chat: {
     type: Object as PropType<Chat>,
@@ -46,46 +44,11 @@ const props = defineProps({
 })
 // for testing purposes
 const ownId = 1;
-const messages = [
-  {
-    "senderId": 1,
-    "content": "hee hoe gaat het? ik vroeg mij af of de kamer nog beschikbaar was sadfjsdfjdslfkjsad flljkadsfkjas jfklja sdkfjdasf sadjkfl sdjlafjdsalf kjdslaf lkfjdaslkfaj dflkdasj fklsdajf ",
-  },
-  {
-    "senderId": 2,
-    "content": "hee het gaat goed, ja hij is nog beschikbaar"
-  },
-  {
-    "senderId": 1,
-    "content": "hee hoe gaat het? ik vroeg mij af of de kamer nog beschikbaar was sadfjsdfjdslfkjsad flljkadsfkjas jfklja sdkfjdasf sadjkfl sdjlafjdsalf kjdslaf lkfjdaslkfaj dflkdasj fklsdajf ",
-  },
-  {
-    "senderId": 1,
-    "content": "hee hoe gaat het? ik vroeg mij af of de kamer nog beschikbaar was sadfjsdfjdslfkjsad flljkadsfkjas jfklja sdkfjdasf sadjkfl sdjlafjdsalf kjdslaf lkfjdaslkfaj dflkdasj fklsdajf ",
-  },
-  {
-    "senderId": 1,
-    "content": "hee hoe gaat het? ik vroeg mij af of de kamer nog beschikbaar was sadfjsdfjdslfkjsad flljkadsfkjas jfklja sdkfjdasf sadjkfl sdjlafjdsalf kjdslaf lkfjdaslkfaj dflkdasj fklsdajf ",
-  },
-  {
-    "senderId": 1,
-    "content": "hee hoe gaat het? ik vroeg mij af of de kamer nog beschikbaar was sadfjsdfjdslfkjsad flljkadsfkjas jfklja sdkfjdasf sadjkfl sdjlafjdsalf kjdslaf lkfjdaslkfaj dflkdasj fklsdajf ",
-  },
-  {
-    "senderId": 1,
-    "content": "hee hoe gaat het? ik vroeg mij af of de kamer nog beschikbaar was sadfjsdfjdslfkjsad flljkadsfkjas jfklja sdkfjdasf sadjkfl sdjlafjdsalf kjdslaf lkfjdaslkfaj dflkdasj fklsdajf ",
-  },
-]
-
-const chatMessages = ref(messages)
-
-
+const chatMessages : any = ref([])
 const chatTitle = computed(() => {
   return `Chat met ${props.chat.contact}`
 })
-
 const getMessageStyle = (message: any) => {
-
   if (message.senderId === ownId) {
     return {
       "is-justify-content-flex-start": true,
@@ -98,11 +61,8 @@ const getMessageStyle = (message: any) => {
     "has-background-info-dark": true,
     "message-right": true
   }
-
 }
-
 const currentMessage = ref("");
-
 const sendMessage = () => {
   const trimmedMessage = currentMessage.value.trim();
   if (trimmedMessage !== "") {
