@@ -15,8 +15,12 @@
 const route = useRoute()
 const roomStore = useRoomStorage();
 
-const room = computed(() => {
-  return roomStore.room(route.params.id as string)
+const room = ref()
+
+onBeforeMount(async () => {
+  room.value = roomStore.getRoom(route.params.id as string) ?? await roomStore.fetchRoom(route.params.id as string)
 })
+
+
 
 </script>

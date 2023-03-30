@@ -12,7 +12,7 @@ const roomStore = useRoomStorage();
 const rooms = computed(() => roomStore.rooms);
 
 
-onMounted(async () => {
+onBeforeMount(async () => {
   await roomStore.fetchRooms();
 })
 

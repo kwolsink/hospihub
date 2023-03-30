@@ -8,7 +8,7 @@ export const useRoomStorage = defineStore('roomStorage', {
     rooms: [] as Room[],
   }),
   getters: {
-    room: (state) => (id : string) => {
+    getRoom: (state) => (id : string) => {
       return state.rooms.find((room) => room.id === id);
     },
     getRooms: (state) => {
@@ -21,6 +21,12 @@ export const useRoomStorage = defineStore('roomStorage', {
       const roomRecords = await nuxtApp.$pb.collection('rooms').getList(1, 50)
       this.rooms = roomRecords.items.map((roomRecord) => mapRecordToRoom(roomRecord))
       return this.rooms
+    },
+    async fetchRoom(id: string) {
+      const nuxtApp = useNuxtApp()
+      const roomRecord = await nuxtApp.$pb.collection('rooms').getOne(id)
+      const room = mapRecordToRoom(roomRecord)
+      return room
     }
   }
 })
