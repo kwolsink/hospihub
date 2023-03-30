@@ -14,4 +14,5 @@ export default interface Room {
   images: string[],
   createdAt: Date,
   updatedAt: Date,
+  amountOfRoommates: number,
 }
