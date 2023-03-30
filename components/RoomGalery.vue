@@ -9,12 +9,11 @@
 
 <script setup lang="ts">
 const roomStore = useRoomStorage();
-const rooms = ref()
+const rooms = computed(() => roomStore.rooms);
 
 
 onMounted(async () => {
-  const r = await roomStore.fetchRooms();
-  rooms.value = r
+  await roomStore.fetchRooms();
 })
 
 </script>
