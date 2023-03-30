@@ -8,12 +8,13 @@
 </template>
 
 <script setup lang="ts">
-import { useRoomStore } from '~~/stores/roomstore';
-const roomStore = useRoomStore();
+const roomStore = useRoomStorage();
+const rooms = ref()
 
-const rooms = computed(() => {
-  roomStore.fetchRooms();
-  return roomStore.$state.rooms
+
+onMounted(async () => {
+  const r = await roomStore.fetchRooms();
+  rooms.value = r
 })
 
 </script>

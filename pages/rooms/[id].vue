@@ -11,15 +11,12 @@
 </template>
 
 <script setup lang="ts">
-import { useRoomStore } from '~~/stores/roomstore';
 
 const route = useRoute()
-const roomStore = useRoomStore();
+const roomStore = useRoomStorage();
 
 const room = computed(() => {
-  return roomStore.getRoomById(route.params.id as string)
+  return roomStore.room(route.params.id as string)
 })
-
-
 
 </script>
