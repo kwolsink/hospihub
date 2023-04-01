@@ -19,6 +19,7 @@ const useChatStore = defineStore('chatStore', {
       const chatRecords = await nuxtApp.$pb.collection(Collections.Chats).getFullList<ChatsResponse>({ filter: "user1 = @request.auth.id || user2 = @request.auth.id" })
       const newChats = chatRecords.filter(r => !this.chats.some(c => c.id === r.id))
       this.chats.push(...newChats);
+      return newChats
     },
     async createChat(otherUserId: string) {
       const nuxtApp = useNuxtApp()
@@ -30,11 +31,13 @@ const useChatStore = defineStore('chatStore', {
       }
       const newChat = await nuxtApp.$pb.collection(Collections.Chats).create<ChatsResponse>(chatRecord)
       this.chats.push(newChat)
+      return newChat
     },
     async loadMessages(chatId: string) {
       const nuxtApp = useNuxtApp()
       const newMessages = await nuxtApp.$pb.collection(Collections.Messages).getFullList<MessagesResponse>({ filter: `chat = ${chatId}` })
       this.messages.set(chatId, newMessages)
+      return newMessages
     },
     async sendMessage(content: string, chatId: string) {
       if (this.messages.get(chatId) === undefined) {
@@ -49,6 +52,7 @@ const useChatStore = defineStore('chatStore', {
       }
       const sentMessage = await nuxtApp.$pb.collection(Collections.Messages).create<MessagesResponse>(message)
       this.messages.get(chatId)?.push(sentMessage)
+      return sentMessage
     }
   }
 }
