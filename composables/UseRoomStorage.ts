@@ -1,11 +1,9 @@
 import {defineStore} from 'pinia'
-import Room from '~~/shared/types/Room';
-
-
+import { RoomsResponse, Collections } from '~~/shared/types/pocketbase-types';
 
 export const useRoomStorage = defineStore('roomStorage', {
   state: () => ({
-    rooms: [] as Room[],
+    rooms: [] as RoomsResponse[],
   }),
   getters: {
     getRoom: (state) => (id : string) => {
@@ -18,15 +16,16 @@ export const useRoomStorage = defineStore('roomStorage', {
   actions: {
     async fetchRooms()  {
       const nuxtApp = useNuxtApp()
-      const roomRecords = await nuxtApp.$pb.collection('rooms').getList(1, 50)
-      this.rooms = roomRecords.items.map((roomRecord) => mapRecordToRoom(roomRecord))
-      return this.rooms
+      const fetchedRooms = await nuxtApp.$pb.collection(Collections.Rooms).getFullList<RoomsResponse>()
+      const newRooms = fetchedRooms.filter(room => !this.rooms.some(r => room.id === r.id))
+      this.rooms.push(...newRooms)
+      return newRooms
     },
     async fetchRoom(id: string) {
       const nuxtApp = useNuxtApp()
-      const roomRecord = await nuxtApp.$pb.collection('rooms').getOne(id)
-      const room = mapRecordToRoom(roomRecord)
-      return room
+      const fetchedRoom = await nuxtApp.$pb.collection(Collections.Rooms).getOne<RoomsResponse>(id)
+      if (this.rooms.some(r => r.id === fetchedRoom.id)) this.rooms.push(fetchedRoom)
+      return fetchedRoom;
     }
   }
 })
