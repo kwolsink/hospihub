@@ -1,5 +1,6 @@
 <template>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="https://bulma.io">
         <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
@@ -35,16 +36,16 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <div v-if="false" class="buttons-logged-out">
+            <div v-if="authToken === ''" class="buttons-logged-out">
               <a class="button is-primary">
                 <strong>Sign up</strong>
               </a>
-              <a class="button is-light">
+              <a class="button is-light" @click="loginModalOpen = true">
                 Log in
               </a>
             </div>
             <div v-else class="buttons-logged-in">
-              <a class="button is-light">
+              <a class="button is-light" @click="() => pbLogout()">
                 Log uit
               </a>
             </div>
@@ -53,5 +54,18 @@
       </div>
     </div>
   </nav>
+
+  <LoginModal :modalOpen="loginModalOpen" @close="loginModalOpen = false"></LoginModal>
+  </div>
+
 </template>
 
+
+<script setup lang="ts">
+
+const nuxtApp = useNuxtApp()
+const loginModalOpen = ref(false)
+const authToken = usePBAuth()
+
+
+</script>
