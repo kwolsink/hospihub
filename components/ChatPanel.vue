@@ -1,11 +1,11 @@
 <template>
-  <div class="panel chatpanel">
+  <div v-if="openChat" class="panel chatpanel">
     <p class="panel-heading">
       {{ chatTitle }}
     </p>
     <p class="panel-block chat-content-window" id="chatWindow">
     <div class="is-flex is-flex-direction-column message-container">
-      <div v-for="message in chatMessages" class="message" :class="getMessageStyle(message)">
+      <div v-for="message in chatStore.getMessages(openChat.id)" class="message" :class="getMessageStyle(message)">
         {{ message.content }}
       </div>
     </div>
@@ -23,11 +23,10 @@
 </template>
 
 <script setup lang="ts">
-import Chat from '~~/shared/types/Chat';
 
+const chatStore = useChatStore()
 
 // set scroll from top
-
 onMounted(() => {
   const chatWindow = document.getElementById("chatWindow")
   if (chatWindow) {
@@ -35,21 +34,25 @@ onMounted(() => {
   }
 })
 
-
 const props = defineProps({
-  chat: {
-    type: Object as PropType<Chat>,
+  chatId: {
+    type: String,
     required: true
   }
 })
-// for testing purposes
-const ownId = 1;
-const chatMessages : any = ref([])
-const chatTitle = computed(() => {
-  return `Chat met ${props.chat.contact}`
+
+// receive the chat
+const openChat = computed(() => {
+  return chatStore.getChat(props.chatId)
 })
+
+const chatTitle = computed(() => {
+  const contactId = openChat.value?.user1 === getUserId() ? openChat.value?.user2 : openChat.value?.user1
+  return `Chat met ${contactId}`
+})
+
 const getMessageStyle = (message: any) => {
-  if (message.senderId === ownId) {
+  if (message.senderId === getUserId()) {
     return {
       "is-justify-content-flex-start": true,
       "has-background-success-dark": true,
@@ -62,15 +65,17 @@ const getMessageStyle = (message: any) => {
     "message-right": true
   }
 }
+
+
 const currentMessage = ref("");
+
+
 const sendMessage = () => {
+  if (!openChat.value) return
+
   const trimmedMessage = currentMessage.value.trim();
   if (trimmedMessage !== "") {
-    const message = {
-      "senderId": ownId,
-      "content": trimmedMessage
-    }
-    chatMessages.value.push(message);
+    chatStore.sendMessage(trimmedMessage, openChat.value.id)
     currentMessage.value = "";
     const chatWindow = document.getElementById("chatWindow");
     if (chatWindow)

@@ -10,5 +10,10 @@ const pbLogout = () => {
   nuxtApp.$pb.authStore.clear()
 }
 
+const getUserId = () => {
+  const nuxtApp = useNuxtApp()
+  return nuxtApp.$pb.authStore.model?.id
+}
 
-export {loginWithUsernameAndPassword, pbLogout}
+
+export {loginWithUsernameAndPassword, pbLogout, getUserId}
