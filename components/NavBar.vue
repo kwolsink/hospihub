@@ -27,7 +27,7 @@
           Plaats een kamer
         </NuxtLink>
 
-        <NuxtLink v-if="false" to="/profile" class="navbar-item has-text-info">
+        <NuxtLink v-if="authToken !== ''" to="/profile" class="navbar-item has-text-info">
           Profiel
         </NuxtLink>
 
