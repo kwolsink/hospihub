@@ -1,5 +1,5 @@
 import {defineStore} from 'pinia'
-import { RoomsResponse, Collections } from '~~/shared/types/pocketbase-types';
+import { RoomsResponse, Collections, IsoDateString } from '~~/shared/types/pocketbase-types';
 
 export const useRoomStorage = defineStore('roomStorage', {
   state: () => ({
@@ -26,6 +26,22 @@ export const useRoomStorage = defineStore('roomStorage', {
       const fetchedRoom = await nuxtApp.$pb.collection(Collections.Rooms).getOne<RoomsResponse>(id)
       if (this.rooms.some(r => r.id === fetchedRoom.id)) this.rooms.push(fetchedRoom)
       return fetchedRoom;
+    },
+    async createRoom(title : string, rent: number, deposit : number, availableFrom: IsoDateString, amountOfRoommates: number, description? : string, images?: string[]) {
+      const nuxtApp = useNuxtApp()
+      await nuxtApp.$pb.collection(Collections.Rooms).create<RoomsResponse>({
+        title,
+        rent,
+        deposit,
+        availableFrom,
+        amountOfRoommates,
+        description,
+        images,
+        active: true,
+        owner: getUserId()
+      })
+      console.log('room created!')
+      this.fetchRooms()
     }
   }
 })

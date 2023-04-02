@@ -3,7 +3,7 @@
     <div class="field">
       <label class="label">Titel</label>
       <div class="control">
-        <input class="input" type="text" placeholder="e.g. Mooie kamer in het centrum van de stad">
+        <input v-model="roomData.title" class="input" type="text" placeholder="e.g. Mooie kamer in het centrum van de stad">
       </div>
     </div>
 
@@ -25,7 +25,7 @@
     <div class="field">
       <label class="label">Beschrijving</label>
       <div class="control">
-        <textarea class="textarea" placeholder="Plaats hier uw beschrijving"></textarea>
+        <textarea v-model="roomData.description" class="textarea" placeholder="Plaats hier uw beschrijving"></textarea>
       </div>
     </div>
 
@@ -44,13 +44,33 @@
           </span>
         </label>
       </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Huur (per maand)</label>
+      <div class="control">
+        <input v-model="roomData.rent" class="input" type="number">
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Borg (eenmalig)</label>
+      <div class="control">
+        <input v-model="roomData.deposit" class="input" type="number">
+      </div>
+    </div>
 
 
+    <div class="field">
+      <label class="label">Aantal huisgenoten</label>
+      <div class="control">
+        <input v-model="roomData.amountOfRoommates" class="input" type="number">
+      </div>
     </div>
 
     <div class="field">
       <p class="control">
-        <button class="button is-success">
+        <button class="button is-success" @click="placeRoom()">
           Plaats advertentie
         </button>
       </p>
@@ -58,7 +78,25 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
+
+const roomStore = useRoomStorage()
 const selected = ref()
+
+const roomData = ref({
+  title: "",
+  rent: 0,
+  deposit: 0,
+  availableFrom: new Date().toISOString(),
+  images: [],
+  amountOfRoommates: 0,
+  description: ""
+})
+
+
+const placeRoom = async () => {
+  const rd = roomData.value
+  await roomStore.createRoom(rd.title, rd.rent,rd.deposit, rd.availableFrom, rd.amountOfRoommates, rd.description, rd.images)
+}
 
 </script>
