@@ -25,7 +25,6 @@ const chatStore = useChatStore()
 // load all the chats
 onMounted(async () => {
   const chats = await chatStore.loadChats()
-  console.log("chats loaded " + chats)
 })
 
 
@@ -41,8 +40,5 @@ const shortenMessagePreview = (msg: string) => {
   }
   return `${msg.substring(0, maxMessagePreviewLength - 3)}...`
 }
-
-
-
 </script>
 

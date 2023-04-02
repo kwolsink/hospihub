@@ -6,14 +6,14 @@
         <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
       </a>
 
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" @click="isMenuActive = !isMenuActive">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
       </a>
     </div>
 
-    <div id="navbarBasicExample" class="navbar-menu">
+    <div id="navbarBasicExample" class="navbar-menu" :class="{'is-active': isMenuActive}">
       <div class="navbar-start">
         <NuxtLink to="/" class="navbar-item">
           Home
@@ -66,6 +66,8 @@
 const nuxtApp = useNuxtApp()
 const loginModalOpen = ref(false)
 const authToken = usePBAuth()
+
+const isMenuActive = ref(false)
 
 
 </script>

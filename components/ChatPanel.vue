@@ -23,16 +23,22 @@
 </template>
 
 <script setup lang="ts">
+import { MessagesResponse } from '~~/shared/types/pocketbase-types';
+
 
 const chatStore = useChatStore()
 
-// set scroll from top
 onMounted(() => {
-  const chatWindow = document.getElementById("chatWindow")
-  if (chatWindow) {
-    chatWindow.scrollTop = chatWindow?.scrollHeight;
-  }
+  loadChat()
 })
+
+
+const setScrollToBottom = () => {
+  const chatWindow = document.getElementById("chatWindow")
+    if (chatWindow) {
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+}
 
 const props = defineProps({
   chatId: {
@@ -40,6 +46,20 @@ const props = defineProps({
     required: true
   }
 })
+
+// watch the open chat
+watch(props, async (oldVal, newVal) => {
+  console.log("chat openened!")
+  if (oldVal.chatId !== newVal.chatId) { // new chat is opened
+    loadChat()
+  }
+})
+
+const loadChat = async () => {
+  await chatStore.loadMessages(props.chatId)
+  setScrollToBottom
+}
+
 
 // receive the chat
 const openChat = computed(() => {
@@ -51,18 +71,19 @@ const chatTitle = computed(() => {
   return `Chat met ${contactId}`
 })
 
-const getMessageStyle = (message: any) => {
-  if (message.senderId === getUserId()) {
+const getMessageStyle = (message: MessagesResponse) => {
+  if (message.sender === getUserId()) {
     return {
       "is-justify-content-flex-start": true,
       "has-background-success-dark": true,
       "message-left": true
     }
-  }
-  return {
-    "is-justify-content-flex-end": true,
-    "has-background-info-dark": true,
-    "message-right": true
+  } else {
+    return {
+      "is-justify-content-flex-end": true,
+      "has-background-info-dark": true,
+      "message-right": true
+    }
   }
 }
 
@@ -78,15 +99,13 @@ const sendMessage = () => {
     chatStore.sendMessage(trimmedMessage, openChat.value.id)
     currentMessage.value = "";
     const chatWindow = document.getElementById("chatWindow");
-    if (chatWindow)
-      setTimeout(() => chatWindow.scrollTop = chatWindow?.scrollHeight, 10);
+    setTimeout(() => setScrollToBottom(), 10);
   }
 }
 
 </script>
 
 <style scoped>
-
 .chat-content-window {
   min-height: 100px;
   max-height: 20em;

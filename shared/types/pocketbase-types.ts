@@ -34,16 +34,16 @@ export type AuthSystemFields<T = never> = {
 // Record types for each collection
 
 export type ChatsRecord = {
-	user1?: RecordIdString
-	user2?: RecordIdString
+	user1: RecordIdString
+	user2: RecordIdString
 	lastMessage?: string
 	active: boolean
 }
 
 export type MessagesRecord = {
-	sender?: RecordIdString
-	chat?: RecordIdString
-	content?: string
+	sender: RecordIdString
+	chat: RecordIdString
+	content: string
 }
 
 export type RoomsRecord = {
@@ -51,8 +51,8 @@ export type RoomsRecord = {
 	rent?: number
 	deposit?: number
 	availableFrom?: IsoDateString
-	active?: boolean
-	owner?: RecordIdString
+	active: boolean
+	owner: RecordIdString
 	images?: string[]
 	amountOfRoommates?: number
 	description?: string
