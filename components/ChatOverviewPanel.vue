@@ -22,6 +22,12 @@ import { ChatsResponse } from '~~/shared/types/pocketbase-types';
 
 const chatStore = useChatStore()
 
+// load all the chats
+onMounted(async () => {
+  const chats = await chatStore.loadChats()
+  console.log("chats loaded " + chats)
+})
+
 
 const getContactName = (chat : ChatsResponse) => {
   const contactId = chat.user1 === getUserId() ? chat.user2 : chat.user1

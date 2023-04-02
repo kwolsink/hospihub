@@ -16,7 +16,7 @@ const useChatStore = defineStore('chatStore', {
   actions: {
     async loadChats() {
       const nuxtApp = useNuxtApp()
-      const chatRecords = await nuxtApp.$pb.collection(Collections.Chats).getFullList<ChatsResponse>({ filter: "user1 = @request.auth.id || user2 = @request.auth.id" })
+      const chatRecords = await nuxtApp.$pb.collection(Collections.Chats).getFullList<ChatsResponse>({ filter: `user1.id = "${getUserId()}" || user2.id = "${getUserId()}"`}) 
       const newChats = chatRecords.filter(r => !this.chats.some(c => c.id === r.id))
       this.chats.push(...newChats);
       return newChats
@@ -35,7 +35,7 @@ const useChatStore = defineStore('chatStore', {
     },
     async loadMessages(chatId: string) {
       const nuxtApp = useNuxtApp()
-      const newMessages = await nuxtApp.$pb.collection(Collections.Messages).getFullList<MessagesResponse>({ filter: `chat = ${chatId}` })
+      const newMessages = await nuxtApp.$pb.collection(Collections.Messages).getFullList<MessagesResponse>({ filter: `chat = "${chatId}"` })
       this.messages.set(chatId, newMessages)
       return newMessages
     },
